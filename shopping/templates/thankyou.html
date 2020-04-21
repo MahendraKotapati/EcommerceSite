@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    {% if shopping %}
+        <div class="row">
+            <div class="col-md-3">
+                <a href="{% url 'index' %}" class="btn btn-primary" role="button">ContinueShopping</a>
+            </div>
+        </div>
+        <h4> Following are the things confirmed by you. </h4>
+    {% endif %}
+
+    <div class="row" style="border-bottom: 5px solid #ccc;">
+        {% for item in cart_items %}
+            <div class="col-md-12">
+                <div class="col-md-2">
+                    <img  style="width: 30%;display: block; margin: 0 auto;" src="{{ STATIC_URL }}/static/{{item.product.title}}.jpg">
+                </div>
+                <div class="col-md-6" style="text-align: center;">
+                    <p> {{ item.product.title }} </p>
+                </div>
+                <div class="col-md-2">
+                    <p> {{ item.quantity }} </p>
+                </div>
+                <div class="col-md-2">
+                    {% widthratio item.product.unit_price 1 item.quantity %}
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8">  </div>
+            <div class="col-md-2">  
+                <span>TotalAmount:</span>
+            </div>
+            <div class="col-md-2">  
+                {{ sum }}
+            </div>
+        </div>
+    </div>
+
+    {% if shopping %}
+        <div class="row">
+            <div class="col-md-10">  </div>
+            <div class="col-md-2"> 
+                <a href="{% url 'credit_card_page' %}" class="btn btn-primary" role="button"> Confirm </a>
+            </div>
+        </div>
+    {% endif %}
+
+
+{% endblock %}
