@@ -44,3 +44,22 @@
 }
 
 
+.login_container {
+    background-color: white;
+    margin-top: 100px;
+    margin-left: 500px;
+    width: 350px;
+    padding : 10px 10px 10px 10px;
+}
+
+.username-display {
+    margin-bottom: -20px;
+    margin-top: -3px;
+    font-weight: bold;
+    padding-bottom: 0px;
+}
+
+.right-nav-display {
+    margin-bottom: -20px;
+    margin-top: -5px;
+}

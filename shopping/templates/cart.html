@@ -28,14 +28,14 @@
                 <div class="col-md-2">
                     <img style="width:30%;display:block; margin:0 auto" src=" {{ STATIC_URL }}/static/{{item.product.title}}.jpg">
                 </div>
-                <div class="col-md-4" style="text-align: center;">
+                <div class="col-md-4" style="text-align: center;"> 
                     <p>{{ item.product.title }} </p>
                 </div>
                 <div class="col-md-1" style="text-align: center;">
                     <p>{{ item.product.unit_price }} </p>
                 </div>
                 <div class="col-md-1" style="text-align: center;">
-                    <a href="{% url 'remove_item' %}?item_id={{ item.id }} "  class="btn-btn-danger" role="button"> Remove  </a>
+                    <a href="{% url 'remove_item' %}?item_id={{ item.id }} "  class="btn btn-danger" role="button"> Remove  </a>
                 </div>
                 <div class="col-md-1" style="text-align: center;">
                     <input type="text" class="form-control" id="{{ item.id }}" placeholder="quantity" value="{{ item.quantity }}">
@@ -65,7 +65,7 @@
     </div>
 
 {% else %}
-<h1>  Your shoppingCart is empty. </h1>
+<h1>  Your Shopping Cart is empty. </h1>
 {% endif %}
 
 

@@ -1,0 +1,49 @@
+{% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
+
+<!DOCTYPE  html>
+<html >
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width , initial-scale=1">
+    <title >  {% block title %}   {% endblock %} </title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+
+    <link rel="stylesheet" href="{% static 'default.css' %}">
+    <link rel="stylesheet" href="{% static 'equal-height.css' %}">
+
+</head>
+<body style="background-color: black;">
+    <form method="post" action="" class="login_container"> {% csrf_token %}
+        <h2 style="display: inline;"> Login</h2>
+        <a href="{% url 'index' %}"><span class="glyphicon glyphicon-remove" style="float:right;"></span> </a>
+
+        <input type="text" class="form-control" name="username" placeholder="Email" required="" autofocus=""/> <br>
+        <input type="password" class="form-control" name="password" placeholder="password" required=""/> <br>
+         
+        <button type="submit" class="btn btn-lg btn-block btn-success">Login</button> <br>
+        <a href="{% url 'signup' %}" class="btn btn-lg btn-block btn-success">SignUp</a>
+        <hr> <p> Connect with : </p>
+        <a href="{% provider_login_url 'google' %}" style="padding-left: 80px;"> <img src="{{STATIC_URL}}/static/google_logo.png"> </a>
+        <a href="{% provider_login_url 'facebook' method='js_sdk' %}" style="padding-left: 50px;"> <img src="{{STATIC_URL}}/static/facebook_logo.png"> </a>
+
+    </form>
+
+    {% for msg in messages %}
+        {% if msg.tags == 'success' %}
+            <div class="alert alert-success" style="width: fit-content;margin-left: 550px;"> {{ msg }} </div>
+        {% elif msg.tags == 'error' %}
+            <div class="alert alert-danger" style="width: fit-content;margin-left: 550px;"> {{ msg }} </div>
+        {% endif %}
+    {% endfor %}
+    
+</body>
+
+</html>

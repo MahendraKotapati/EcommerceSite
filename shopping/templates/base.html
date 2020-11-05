@@ -21,18 +21,31 @@
 <body>
     <div class="container">
         <div class="jumbotron">
-            <h1>Amazon</h1>
+            <h1>Spend</h1>
+            {% for msg in messages %}
+            {% if msg.tags == 'success' %}
+                <div class="alert alert-success alert-dismissible" style="width: fit-content;margin-left: 300px;"> 
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ msg }} 
+                </div>
+            {% elif msg.tags == 'error' %}
+                <div class="alert alert-danger alert-dismissible" style="width: fit-content;margin-left: 300px;">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ msg }} 
+                </div>
+            {% endif %}
+        {% endfor %}
         </div>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="{% url 'index' %}">Amazon</a>
+                    <a class="navbar-brand" href="{% url 'index' %}">Spend</a>
                 </div>
 
                 <ul class="nav navbar-nav">
-                    <li class = '{% if page == "home" %} "active" {% endif %}' > <a href="{% url 'index' %}">Home</a> </li>
+                    <li class = {% if page == 'home' %} 'active' {% endif %} > <a href="{% url 'index' %}">Home</a> </li>
                     {% if user %}
-                    <li class = '{% if page == "cart" %} "active" {% endif %}' > <a href="{% url 'cart' %}">Cart
+                    <li class = {% if page == "cart" %} "active" {% endif %} > <a href="{% url 'cart' %}">Cart
                         {% if items > 0 %}
                             <button type="button" class="btn btn-danger btn-xs">  {{ items }} </button>
                         {% endif %}
@@ -40,7 +53,23 @@
                     </a>  </li>
                     {% endif %}
                 </ul>    
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    {% if user.is_authenticated %}
+                         
+                        <li>  <a href="#" class="username-display"><p style="color: black;">{{ user.username }}</p>   </a>  </li>
+                        <li> 
+                            <a href="{% url 'logout' %}" class="right-nav-display">     
+                              <button type="button" class="btn btn-danger">logout </button>
+                            </a> 
+                        </li> 
+                    {%  else  %}
+                    <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    {% endif %}
+                </ul>
             </div>
+
         </nav>
 
         <div class="row">
@@ -48,6 +77,8 @@
                 {% block content %}{% endblock %}
             </div>
         </div>
+
+        
         
     </div>
 

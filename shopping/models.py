@@ -8,6 +8,7 @@ class Cart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     created_date = models.DateTimeField(verbose_name='create date',auto_now=True)
     checked_out =  models.BooleanField(default=False,verbose_name='checked_out')
+    
 
     def __unicode__(self):
         return str(self.created_date)
